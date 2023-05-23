@@ -10,7 +10,7 @@ namespace URL_Shortener_DAL.Interfaces
     public interface IUnitOfWork
     {
         IRepository<UserEntity> Users { get; }
-        IRepository<ShortUrlEntity> ShortUrls { get; }
+        IShortUrlRepository ShortUrls { get; }
         void Save();
     }
 }

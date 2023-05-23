@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace URL_Shortener_DAL.Context
 {
     public interface IUrlShortenerContext
     {
+        public DbSet<UserEntity> users { get; set; }
+        public DbSet<ShortUrlEntity> shortUrls { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace URL_Shortener_BLL.Interfaces
 {
-    internal class IUserService
+    public interface IUserService
     {
     }
 }

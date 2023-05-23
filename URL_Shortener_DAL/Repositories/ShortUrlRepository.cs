@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ using URL_Shortener_DAL.Interfaces;
 
 namespace URL_Shortener_DAL.Repositories
 {
-    public class ShortUrlRepository : IRepository<ShortUrlEntity>
+    public class ShortUrlRepository : IShortUrlRepository
     {
         private readonly IUrlShortenerContext db;
         public ShortUrlRepository(IUrlShortenerContext context)
@@ -18,29 +19,27 @@ namespace URL_Shortener_DAL.Repositories
             db = context;
         }
 
-        public Task<Result> Create(ShortUrlEntity item)
+        public async Task<ShortUrlEntity> Create(ShortUrlEntity item)
         {
-            throw new NotImplementedException();
+            var res = await db.shortUrls.AddAsync(item);
+            return res.Entity;      
         }
 
-        public Task<Result> Delete(int id)
+        public async Task<Result> Delete(int id)
         {
-            throw new NotImplementedException();
+            var res = db.shortUrls.Remove(db.shortUrls.Single(i => i.Id == id));
+            return new Result("completed", true);
         }
 
-        public Task<ShortUrlEntity> Get(int id)
+        public async Task<ShortUrlEntity> Get(int id)
         {
-            throw new NotImplementedException();
+            var res = await db.shortUrls.SingleAsync(i => i.Id == id);
+            return res;
         }
 
-        public Task<IQueryable<ShortUrlEntity>> Get()
+        public async Task<IEnumerable<ShortUrlEntity>> Get()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Result> Update(ShortUrlEntity item)
-        {
-            throw new NotImplementedException();
+            return await db.shortUrls.ToListAsync();
         }
     }
 }

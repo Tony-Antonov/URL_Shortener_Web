@@ -17,7 +17,7 @@ namespace URL_Shortener_DAL.Repositories
         {
             db = context;
         }
-        public Task<Result> Create(UserEntity item)
+        public Task<UserEntity> Create(UserEntity item)
         {
             throw new NotImplementedException();
         }
@@ -32,12 +32,7 @@ namespace URL_Shortener_DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IQueryable<UserEntity>> Get()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Result> Update(UserEntity item)
+        public Task<IEnumerable<UserEntity>> Get()
         {
             throw new NotImplementedException();
         }

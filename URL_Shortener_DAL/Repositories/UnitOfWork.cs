@@ -12,7 +12,7 @@ namespace URL_Shortener_DAL.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private UrlShortenerContext db;
-        private IRepository<ShortUrlEntity> shortUrlRepository;
+        private IShortUrlRepository shortUrlRepository;
         private IRepository<UserEntity> userRepository;
 
 
@@ -26,7 +26,7 @@ namespace URL_Shortener_DAL.Repositories
             }
         }
 
-        public IRepository<ShortUrlEntity> ShortUrls
+        public IShortUrlRepository ShortUrls
         {
             get
             {

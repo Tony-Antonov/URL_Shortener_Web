@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace URL_Shortener_BLL.Models
 {
-    internal class User
+    public class User
     {
+        public int Id { get; set; }
     }
 }
