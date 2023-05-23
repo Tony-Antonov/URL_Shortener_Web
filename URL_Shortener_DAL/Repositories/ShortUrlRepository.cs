@@ -10,7 +10,7 @@ using URL_Shortener_DAL.Interfaces;
 
 namespace URL_Shortener_DAL.Repositories
 {
-    internal class ShortUrlRepository : IRepository<ShortUrlEntity>
+    public class ShortUrlRepository : IRepository<ShortUrlEntity>
     {
         private readonly IUrlShortenerContext db;
         public ShortUrlRepository(IUrlShortenerContext context)
@@ -33,7 +33,7 @@ namespace URL_Shortener_DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IQueryable<ShortUrlEntity>> GetAll()
+        public Task<IQueryable<ShortUrlEntity>> Get()
         {
             throw new NotImplementedException();
         }

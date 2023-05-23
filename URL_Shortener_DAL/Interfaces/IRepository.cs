@@ -9,7 +9,7 @@ namespace URL_Shortener_DAL.Interfaces
 {
     public interface IRepository<T>
     {
-        Task<IQueryable<T>> GetAll();
+        Task<IQueryable<T>> Get();
         Task<T> Get(int id);
         Task<Result> Create(T item);
         Task<Result> Delete(int id);

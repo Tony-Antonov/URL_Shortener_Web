@@ -7,7 +7,7 @@ using URL_Shortener_DAL.Entities;
 
 namespace URL_Shortener_DAL.Interfaces
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
         IRepository<UserEntity> Users { get; }
         IRepository<ShortUrlEntity> ShortUrls { get; }

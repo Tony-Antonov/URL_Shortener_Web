@@ -1,7 +1,18 @@
+using URL_Shortener_DAL.Context;
+using URL_Shortener_DAL.Repositories;
+using URL_Shortener_DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<IUrlShortenerContext,UrlShortenerContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
 
 var app = builder.Build();
 

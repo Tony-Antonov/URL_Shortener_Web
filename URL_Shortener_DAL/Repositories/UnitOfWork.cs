@@ -3,20 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using URL_Shortener_DAL.Context;
 using URL_Shortener_DAL.Entities;
 using URL_Shortener_DAL.Interfaces;
 
 namespace URL_Shortener_DAL.Repositories
 {
-    internal class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
-        public IRepository<UserEntity> Users => throw new NotImplementedException();
+        private UrlShortenerContext db;
+        private IRepository<ShortUrlEntity> shortUrlRepository;
+        private IRepository<UserEntity> userRepository;
 
-        public IRepository<ShortUrlEntity> ShortUrls => throw new NotImplementedException();
 
-        public void Save()
+        public IRepository<UserEntity> Users 
         {
-            throw new NotImplementedException();
+            get
+            {
+                if (userRepository == null)
+                    userRepository = new UserRepository(db);
+                return userRepository;
+            }
         }
+
+        public IRepository<ShortUrlEntity> ShortUrls
+        {
+            get
+            {
+                if (shortUrlRepository == null)
+                    shortUrlRepository = new ShortUrlRepository(db);
+                return shortUrlRepository;
+            }
+        }
+
+        public async void Save()
+        {
+            await db.SaveChangesAsync();
+        }
+
     }
 }

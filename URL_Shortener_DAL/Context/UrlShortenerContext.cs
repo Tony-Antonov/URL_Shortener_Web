@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace URL_Shortener_DAL.Context
 {
-    internal class UrlShortenerContext : IdentityDbContext<UserEntity, IdentityRole<int>, int>, IUrlShortenerContext
+    public class UrlShortenerContext : IdentityDbContext<UserEntity, IdentityRole<int>, int>, IUrlShortenerContext
     {
         public UrlShortenerContext(DbContextOptions<UrlShortenerContext> options): base(options) { }
 
-        DbSet<UserEntity> users { get; set; }
-        DbSet<ShortUrlEntity> shortUrls { get; set; }
+        public DbSet<UserEntity> users { get; set; }
+        public DbSet<ShortUrlEntity> shortUrls { get; set; }
     }
 }

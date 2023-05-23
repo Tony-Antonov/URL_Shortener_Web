@@ -9,7 +9,7 @@ using URL_Shortener_DAL.Entities;
 
 namespace URL_Shortener_DAL.Context
 {
-    internal interface IUrlShortenerContext
+    public interface IUrlShortenerContext
     {
     }
 }
