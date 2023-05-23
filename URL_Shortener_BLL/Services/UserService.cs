@@ -66,16 +66,13 @@ namespace URL_Shortener_BLL.Services
 
             if (result.Succeeded)
             {
-                var user = await DataBase.Users.GetByUserName(UserName);
-                var a = await userManager.IsInRoleAsync(user, "admin");
-                var h = 5;
+
             }
             else
             {
-                //ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                
             }
         }
-
 
 
         private UserEntity UserToDALUser(User user)
