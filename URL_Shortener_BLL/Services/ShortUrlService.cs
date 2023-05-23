@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using URL_Shortener_BLL.Interfaces;
 using URL_Shortener_BLL.Models;
+using URL_Shortener_Common.Models;
 using URL_Shortener_DAL.Entities;
 using URL_Shortener_DAL.Interfaces;
 
@@ -20,9 +21,13 @@ namespace URL_Shortener_BLL.Services
             DataBase = dataBase;
         }
 
-        public void DeleteShortUrl(int id)
+        public async Task<Result> DeleteShortUrl(int id)
         {
-            DataBase.ShortUrls.Delete(id);
+            var result = DataBase.ShortUrls.Delete(id);
+
+            await DataBase.Save();
+
+            return await result; //???????????????
         }
 
         public async Task<List<ShortUrl>> Get()

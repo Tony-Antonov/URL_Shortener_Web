@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using URL_Shortener_BLL.Models;
+using URL_Shortener_Common.Models;
 
 namespace URL_Shortener_BLL.Interfaces
 {
@@ -11,7 +12,7 @@ namespace URL_Shortener_BLL.Interfaces
     {
         Task<ShortUrl> Create(ShortUrl shortUrl);
         Task<ShortUrl> GetShortUrl(int id);
-        void DeleteShortUrl(int id);
+        Task<Result> DeleteShortUrl(int id);
         Task<List<ShortUrl>> Get();
     }
 }

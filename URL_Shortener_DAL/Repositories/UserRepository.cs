@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,31 +11,18 @@ using URL_Shortener_DAL.Interfaces;
 
 namespace URL_Shortener_DAL.Repositories
 {
-    public class UserRepository : IRepository<UserEntity>
+    public class UserRepository : IUserRepository
     {
         private readonly IUrlShortenerContext db;
-        public UserRepository(IUrlShortenerContext context)
+
+        public UserRepository(IUrlShortenerContext context) 
         {
             db = context;
         }
-        public Task<UserEntity> Create(UserEntity item)
+        
+        public async Task<UserEntity> GetByUserName(string userName)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Result> Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UserEntity> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<UserEntity>> Get()
-        {
-            throw new NotImplementedException();
+            return db.users.Single(u => u.UserName == userName);
         }
     }
 }

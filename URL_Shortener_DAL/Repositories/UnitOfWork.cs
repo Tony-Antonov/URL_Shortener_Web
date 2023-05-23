@@ -13,10 +13,14 @@ namespace URL_Shortener_DAL.Repositories
     {
         private UrlShortenerContext db;
         private IShortUrlRepository shortUrlRepository;
-        private IRepository<UserEntity> userRepository;
+        private IUserRepository userRepository;
 
+        public UnitOfWork(UrlShortenerContext db)
+        {
+            this.db = db;
+        }
 
-        public IRepository<UserEntity> Users 
+        public IUserRepository Users 
         {
             get
             {
@@ -36,7 +40,7 @@ namespace URL_Shortener_DAL.Repositories
             }
         }
 
-        public async void Save()
+        public async Task Save()
         {
             await db.SaveChangesAsync();
         }
