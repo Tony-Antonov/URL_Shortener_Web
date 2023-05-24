@@ -31,7 +31,6 @@ namespace URL_Shortener_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var result = await userService.Register(ToDomainModel(regModel));
                 if (result.Completed)
                     return RedirectToAction("Index", "Home");
