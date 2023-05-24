@@ -22,7 +22,7 @@ namespace URL_Shortener_DAL.Repositories
         
         public async Task<UserEntity> GetByUserName(string userName)
         {
-            return db.users.Single(u => u.UserName == userName);
+            return await db.users.SingleAsync(u => u.UserName == userName);
         }
     }
 }

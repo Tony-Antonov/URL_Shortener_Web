@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using URL_Shortener_DAL.Entities;
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<UserEntity> SignInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,6 +26,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ShortenerUrl" asp-action="UrlList">Url list</a>
+                        </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ShortenerUrl" asp-action="Create">Make Short Url</a>
+                            </li>
+                        }
                     </ul>
                 </div>
                 @Html.PartialAsync("_LoginPartial").Result

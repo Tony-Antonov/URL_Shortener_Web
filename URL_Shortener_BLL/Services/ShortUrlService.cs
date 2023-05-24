@@ -1,11 +1,4 @@
 ﻿using HashidsNet;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 using URL_Shortener_BLL.Interfaces;
 using URL_Shortener_BLL.Models;
 using URL_Shortener_Common.Models;
@@ -16,25 +9,25 @@ namespace URL_Shortener_BLL.Services
 {
     public class ShortUrlService : IShortUrlService
     {
-        private readonly IUnitOfWork DataBase;
+        private readonly IUnitOfWork dataBase;
         public ShortUrlService(IUnitOfWork dataBase) {
-            DataBase = dataBase;
+            this.dataBase = dataBase;
         }
 
         public async Task<Result> DeleteShortUrl(int id)
         {
-            var result = DataBase.ShortUrls.Delete(id);
+            var result = await dataBase.ShortUrls.Delete(id);
 
-            await DataBase.Save();
+            await dataBase.Save();
 
-            return await result; //???????????????
+            return result;
         }
 
         public async Task<List<ShortUrl>> Get()
         {
-            var a = await DataBase.ShortUrls.Get();
+            var shortUrlEntities = await dataBase.ShortUrls.Get();
             List<ShortUrl> list = new List<ShortUrl>();
-            foreach(var item in a)
+            foreach(var item in shortUrlEntities)
             {
                 list.Add(ToDomainModel(item));
             }
@@ -42,15 +35,42 @@ namespace URL_Shortener_BLL.Services
             return list;
         }
 
-        public async Task<ShortUrl> Create(ShortUrl shortUrl)
+        public async Task<Result> Create(string Url, int userId)
         {
-            var a = await DataBase.ShortUrls.Create(ToEntityModel(shortUrl));
-            return ToDomainModel(a);
+            if (!Uri.IsWellFormedUriString(Url, UriKind.Absolute))
+            {
+                return new Result("it's not URL", false);
+            }
+            if ((await dataBase.ShortUrls.Get()).Any(u => u.Url == Url))
+            {
+                return new Result("This url alreday shorted", false); 
+            }
+     
+            var entity = new ShortUrlEntity()
+            {
+                UserId = userId,
+                CreatedDate = DateTime.Now,
+                Url = Url
+            };
+
+            await dataBase.ShortUrls.Create(entity);
+
+            await dataBase.Save();
+            return new Result("Success", true);
         }
 
-        public async Task<ShortUrl> GetShortUrl(int id)
-        {  
-            return ToDomainModel(await DataBase.ShortUrls.Get(id));
+        public async Task<ShortUrl> GetShortUrlById(int id)
+        {
+            return ToDomainModel(await dataBase.ShortUrls.Get(id));
+        }
+
+        public async Task<ShortUrl> GetShortUrlByCode(string code)
+        {
+            var hashids = new Hashids();
+            var result = hashids.TryDecodeSingle(code, out int Id);
+            if (!result)
+                return null;
+            return ToDomainModel(await dataBase.ShortUrls.Get(Id));
         }
 
         private string generateCode(int Id)
@@ -60,13 +80,6 @@ namespace URL_Shortener_BLL.Services
             return code;
         }
 
-        private int GetIdbyCode(string code)
-        {
-            var hashids = new Hashids();
-            int Id = hashids.DecodeSingle(code);
-            return Id;
-        }
-
         private ShortUrl ToDomainModel(ShortUrlEntity shortUrl) 
         {
             return new ShortUrl()
@@ -74,8 +87,12 @@ namespace URL_Shortener_BLL.Services
                 Id = shortUrl.Id,
                 Code = generateCode(shortUrl.Id),
                 CreatedDate = shortUrl.CreatedDate,
-                CreatedBy = null,
+                CreatedBy = shortUrl.CreatedBy != null ? new User() { 
+                    Id= shortUrl.CreatedBy.Id,
+                    Username = shortUrl.CreatedBy.UserName,            
+                }: null,
                 Url = shortUrl.Url,
+                ShortedUrl = "https://localhost:7178/" + generateCode(shortUrl.Id)
             };     
         }
 
@@ -90,6 +107,5 @@ namespace URL_Shortener_BLL.Services
                 UserId = shortUrl.CreatedBy.Id
             };
         }
-
     }
 }

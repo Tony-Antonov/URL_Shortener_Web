@@ -1,23 +1,30 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using URL_Shortener_BLL.Interfaces;
 using URL_Shortener_Web.Models;
 
 namespace URL_Shortener_Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        IShortUrlService shortUrlService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IShortUrlService shortUrlService)
         {
-            _logger = logger;
+            this.shortUrlService = shortUrlService;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet("{anyLetters}")]
+        public async Task<IActionResult> RedirectTo(string anyLetters)
+        {
+            var shortUrl = await shortUrlService.GetShortUrlByCode(anyLetters);
+            
+            return shortUrl != null? Redirect($"{shortUrl.Url}") : View("PageNotFound");
         }
 
         public IActionResult Privacy()

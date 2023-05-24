@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URL_Shortener_Web", "URL_Shortener_Web\URL_Shortener_Web.csproj", "{B80C2DCE-41E7-4159-B27C-41DB89AC3F0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URL_Shortener_Web", "URL_Shortener_Web\URL_Shortener_Web.csproj", "{B80C2DCE-41E7-4159-B27C-41DB89AC3F0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URL_Shortener_BLL", "URL_Shortener_BLL\URL_Shortener_BLL.csproj", "{C4952C42-414A-46D9-BC59-997EFD6B4EDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URL_Shortener_BLL", "URL_Shortener_BLL\URL_Shortener_BLL.csproj", "{C4952C42-414A-46D9-BC59-997EFD6B4EDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URL_Shortener_DAL", "URL_Shortener_DAL\URL_Shortener_DAL.csproj", "{78743F5A-14F0-4655-8682-A19CFBE1B644}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URL_Shortener_DAL", "URL_Shortener_DAL\URL_Shortener_DAL.csproj", "{78743F5A-14F0-4655-8682-A19CFBE1B644}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URL_Shortener_Common", "URL_Shortener_Common\URL_Shortener_Common.csproj", "{FB98BB44-AB6F-47B0-8938-D1F31B5B1405}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URL_Shortener_Common", "URL_Shortener_Common\URL_Shortener_Common.csproj", "{FB98BB44-AB6F-47B0-8938-D1F31B5B1405}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URL_Shortener_BLL_Test", "URL_Shortener_BLL_Test\URL_Shortener_BLL_Test.csproj", "{92267AF1-73A4-4375-91B2-05DD8E250A87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{FB98BB44-AB6F-47B0-8938-D1F31B5B1405}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB98BB44-AB6F-47B0-8938-D1F31B5B1405}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB98BB44-AB6F-47B0-8938-D1F31B5B1405}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92267AF1-73A4-4375-91B2-05DD8E250A87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92267AF1-73A4-4375-91B2-05DD8E250A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92267AF1-73A4-4375-91B2-05DD8E250A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92267AF1-73A4-4375-91B2-05DD8E250A87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

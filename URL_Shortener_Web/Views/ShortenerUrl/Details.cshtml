@@ -1,0 +1,23 @@
+﻿@model URL_Shortener_Web.Models.UrlInfoViewModel
+
+@{
+    ViewData["Title"] = "URL Details";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <h2>URL Details</h2>
+    <dl class="row">
+        <dt class="col-sm-3">URL:</dt>
+        <dd class="col-sm-9">@Model.Url</dd>
+
+        <dt class="col-sm-3">Shortened URL:</dt>
+        <dd class="col-sm-9">@Model.ShortedUrl</dd>
+
+        <dt class="col-sm-3">Created Date:</dt>
+        <dd class="col-sm-9">@Model.CreatedDate</dd>
+
+        <dt class="col-sm-3">Created By:</dt>
+        <dd class="col-sm-9">@Model.CreatedBy</dd>
+    </dl>
+</div>

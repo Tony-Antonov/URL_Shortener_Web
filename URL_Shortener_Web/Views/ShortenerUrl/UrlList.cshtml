@@ -1,0 +1,39 @@
+﻿@model IEnumerable<URL_Shortener_Web.Models.UrlListViewModel>
+@using Microsoft.AspNetCore.Identity;
+@using URL_Shortener_DAL.Entities;
+@inject SignInManager<UserEntity> SignInManager
+
+<h2>URL List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>URL</th>
+            <th>Shortened URL</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Url</td>
+                <td>@item.ShortUrl</td>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <td>
+                        <a class="btn btn-primary" href="/ShortenerUrl/Details/@item.Id">Details</a>
+                    </td>
+                }
+                @if (User.IsInRole("admin")|| item.UserName == User.Identity.Name)
+                {
+                    <td>
+                        <form asp-action="Delete" asp-route-id=@item.Id method="post" >
+                            <input type="submit" value="Delete" id="" class="btn btn-danger" />
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

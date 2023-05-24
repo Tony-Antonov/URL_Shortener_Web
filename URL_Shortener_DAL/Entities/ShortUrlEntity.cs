@@ -15,6 +15,7 @@ namespace URL_Shortener_DAL.Entities
         public int UserId { get; set; }
         public string Url { get; set; }
         public DateTime CreatedDate { get; set; }
+        [ForeignKey("UserId")]
         public UserEntity CreatedBy { get; set; }
 
     }

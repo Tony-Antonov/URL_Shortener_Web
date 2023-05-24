@@ -33,13 +33,13 @@ namespace URL_Shortener_DAL.Repositories
 
         public async Task<ShortUrlEntity> Get(int id)
         {
-            var res = await db.shortUrls.SingleAsync(i => i.Id == id);
+            var res = await db.shortUrls.Include(u => u.CreatedBy).SingleAsync(i => i.Id == id);
             return res;
         }
 
         public async Task<IEnumerable<ShortUrlEntity>> Get()
         {
-            return await db.shortUrls.ToListAsync();
+            return await db.shortUrls.Include(u => u.CreatedBy).ToListAsync();
         }
     }
 }

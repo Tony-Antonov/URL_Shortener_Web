@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using URL_Shortener_BLL.Services;
 using URL_Shortener_BLL.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using URL_Shortener_BLL.Models;
 using URL_Shortener_DAL.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +30,13 @@ builder.Services.AddIdentity<UserEntity, IdentityRole<int>>(options =>
     options.Password.RequiredLength = 5;
     options.Password.RequiredUniqueChars = 0;
 }).AddRoles<IdentityRole<int>>().AddEntityFrameworkStores<UrlShortenerContext>();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("admin", policy =>
+    {
+        policy.RequireRole("admin");
+    });
+});
 
 var app = builder.Build();
 
@@ -49,7 +55,6 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 app.MapControllerRoute(
     name: "default",
